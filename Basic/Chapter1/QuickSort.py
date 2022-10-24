@@ -1,5 +1,6 @@
 """
 785. 快速排序
+https://www.acwing.com/activity/content/problem/content/819/
 
 input
 5
@@ -38,6 +39,7 @@ def quick_sort(nums: List[int], left: int, right: int):
     quick_sort(nums, p + 1, right)
 
 
+# quick sort
 n = int(input())
 nums = list(map(int, input().split()))
 # random.shuffle(nums)
@@ -46,6 +48,7 @@ print(nums)
 
 """
 786. 第k个数
+https://www.acwing.com/activity/content/problem/content/820/
 
 输入样例：
 5 3
@@ -54,21 +57,19 @@ print(nums)
 3
 """
 
+# quick select kth number
 n, k = map(int, input().split())
 nums = list(map(int, input().split()))
-res = nums[0]
 
 
 def kth_num(nums: List[int], left: int, right: int, k: int):
-    global res
     p = partition(nums, left, right)
     if p == k:
-        res = nums[p]
-    if p < k:
-        kth_num(nums, p + 1, right, k)
-    elif p > k:
-        kth_num(nums, left, p - 1, k)
+        return nums[p]
+    elif p < k:
+        return kth_num(nums, p + 1, right, k)
+    else:
+        return kth_num(nums, left, p - 1, k)
 
 
-kth_num(nums, 0, n - 1, k - 1)
-print(res)
+print(kth_num(nums, 0, n - 1, k - 1))
