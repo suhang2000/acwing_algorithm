@@ -96,3 +96,55 @@ public class Main{
     }
 }
 """
+
+"""
+788. 逆序对的数量
+https://www.acwing.com/problem/content/790/
+
+输入样例：
+6
+2 3 4 5 6 1
+输出样例：
+5
+"""
+
+n = int(input())
+nums = list(map(int, input().split()))
+tmp = [0] * n
+print(n)
+print(nums)
+
+
+def count(left: int, mid: int, right: int) -> int:
+    global nums, tmp
+    tmp[left: right + 1] = nums[left: right + 1]
+    cur = 0
+    i, j = left, mid + 1
+    for k in range(left, right + 1):
+        if i > mid:
+            nums[k: right + 1] = tmp[j: right + 1]
+            break
+        elif j > right:
+            nums[k: right + 1] = tmp[i: mid + 1]
+            break
+        elif tmp[i] <= tmp[j]:
+            nums[k] = tmp[i]
+            i += 1
+        else:
+            # tmp[i] > tmp[j]
+            cur += mid - i + 1
+            nums[k] = tmp[j]
+            j += 1
+    return cur
+
+
+def merge_pair(left: int, right: int) -> int:
+    if left >= right: return 0
+    mid = (left + right) >> 1
+    l = merge_pair(left, mid)
+    r = merge_pair(mid + 1, right)
+    c = count(left, mid, right)
+    return l + r + c
+
+
+print(merge_pair(0, n - 1))
