@@ -119,6 +119,17 @@ def count(left: int, mid: int, right: int) -> int:
     global nums, tmp
     tmp[left: right + 1] = nums[left: right + 1]
     cur = 0
+
+    """
+    # 可在此处处理额外逻辑，比如计算 nums[i] > 2 * nums[j]
+    # leetcode: https://leetcode.cn/problems/reverse-pairs/
+    cur = 0
+    i = left
+    for j in range(mid + 1, right + 1):
+        while i <= mid and 2 * tmp[j] >= tmp[i]:
+            i += 1
+        cur += mid - i + 1
+    """
     i, j = left, mid + 1
     for k in range(left, right + 1):
         if i > mid:
