@@ -63,3 +63,25 @@ for q in query:
         print('-1 -1')
     else:
         print(*bound(idx))
+
+"""
+790. 数的三次方根
+https://www.acwing.com/problem/content/792/
+
+输入样例：
+1000.00
+输出样例：
+10.000000
+"""
+
+n = float(input())
+# left, right = (0, n) if n >= 0 else (n, 0)
+left, right = -10000, 10000
+mid = n
+while right - left >= 1e-8:
+    mid = (left + right) / 2
+    if mid * mid * mid < n:
+        left = mid
+    else:
+        right = mid
+print("{:.6f}".format(mid))
