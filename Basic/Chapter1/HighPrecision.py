@@ -92,3 +92,49 @@ if minus:
     print("-", end='')
 for x in res:
     print(x, end='')
+
+"""
+793. 高精度乘法
+https://www.acwing.com/problem/content/795/
+"""
+
+a = [int(x) for x in list(input())]
+b = int(input())
+res = collections.deque()
+carry = 0
+a.reverse()
+
+i = 0
+while i < len(a) or carry:
+    if i < len(a): carry += a[i] * b
+    res.appendleft(carry % 10)
+    carry //= 10
+    i += 1
+
+while len(res) > 1 and res[0] == 0:
+    res.popleft()
+for x in res:
+    print(x, end='')
+
+
+"""
+794. 高精度除法
+https://www.acwing.com/problem/content/796/
+"""
+
+a = [int(x) for x in list(input())]
+b = int(input())
+res = collections.deque()
+remainder = 0
+
+for x in a:
+    cur = remainder * 10 + x
+    res.append(cur // b)
+    remainder = cur % b
+
+while len(res) > 1 and res[0] == 0:
+    res.popleft()
+for x in res:
+    print(x, end='')
+print()
+print(remainder)
