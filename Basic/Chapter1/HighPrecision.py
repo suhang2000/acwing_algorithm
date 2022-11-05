@@ -104,12 +104,19 @@ res = collections.deque()
 carry = 0
 a.reverse()
 
-i = 0
-while i < len(a) or carry:
-    if i < len(a): carry += a[i] * b
-    res.appendleft(carry % 10)
-    carry //= 10
-    i += 1
+# i = 0
+# while i < len(a) or carry:
+#     if i < len(a): carry += a[i] * b
+#     res.appendleft(carry % 10)
+#     carry //= 10
+#     i += 1
+
+for x in a:
+    cur = carry + x * b
+    res.appendleft(cur % 10)
+    carry = cur // 10
+if carry:
+    res.appendleft(carry)
 
 while len(res) > 1 and res[0] == 0:
     res.popleft()
