@@ -44,7 +44,7 @@ n = int(input())
 s = input()  # 下标从0开始
 
 # 1. 构建next数组
-ne = [-1] * (m + 1)
+ne = [-1] * m
 j = -1
 for i in range(1, m):
     while j != -1 and p[i] != p[j + 1]:
