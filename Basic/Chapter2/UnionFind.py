@@ -67,3 +67,57 @@ for _ in range(m):
         print("Yes" if uf.find(int(line[1])) == uf.find(int(line[2])) else "No")
     else:
         print(uf.get_size(int(line[1])))
+
+"""
+240. 食物链
+https://www.acwing.com/problem/content/242/
+"""
+
+
+class UnionFind3:
+    def __init__(self, n):
+        self.p = list(range(n))
+        self.d = [0] * n    # 每个点到它的父节点的距离
+
+    def find(self, x):
+        if self.p[x] != x:
+            root = self.find(self.p[x])
+            self.d[x] += self.d[self.p[x]]
+            self.p[x] = root
+        return self.p[x]
+
+    def distance(self, x):
+        return self.d[x]
+
+
+n, k = map(int, input().split())
+uf = UnionFind3(n + 1)
+res = 0
+for _ in range(k):
+    d, x, y = map(int, input().split())
+    if x > n or y > n:
+        res += 1
+        continue
+    px, py = uf.find(x), uf.find(y)
+    dx, dy = uf.distance(x), uf.distance(y)
+    if d == 1:
+        # same class
+        if px == py:
+            # on same tree
+            if (dx - dy) % 3 != 0:
+                res += 1
+        else:
+            # not on the same tree, merge
+            uf.p[px] = py
+            uf.d[px] = dy - dx
+    else:
+        if px == py:
+            if (dx - dy - 1) % 3 != 0:
+                res += 1
+        else:
+            # merge
+            uf.p[px] = py
+            # dx + ? = dy + 1 ==> ? = dy + 1 - dx
+            uf.d[px] = dy + 1 - dx
+
+print(res)
