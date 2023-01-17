@@ -63,3 +63,29 @@ for _ in range(n):
         h[k] = x
     else:
         print("Yes" if h[k] != null else "No")
+
+"""
+841. 字符串哈希
+https://www.acwing.com/problem/content/843/
+"""
+
+P = 131  # 131 or 13331
+MOD = 2 ** 64
+n, m = map(int, input().split())
+s = input()
+h, p = [0] * (n + 1), [0] * (n + 1)
+
+# init
+p[0] = 1
+for i in range(1, n + 1):
+    p[i] = (p[i - 1] * P) % MOD
+    h[i] = (ord(s[i - 1]) + h[i - 1] * P) % MOD
+
+
+def get(l, r):
+    return (h[r] - h[l - 1] * p[r - l + 1]) % MOD
+
+
+for _ in range(m):
+    l1, r1, l2, r2 = map(int, input().split())
+    print("Yes" if get(l1, r1) == get(l2, r2) else "No")
