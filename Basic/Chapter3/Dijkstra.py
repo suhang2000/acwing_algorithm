@@ -1,6 +1,7 @@
 """
 Dijkstra
 """
+import heapq
 from math import inf
 
 """
@@ -39,3 +40,38 @@ def dijkstra():
 
 
 print(dijkstra())
+
+"""
+850. Dijkstra求最短路 II
+https://www.acwing.com/problem/content/852/
+"""
+
+n, m = map(int, input().split())
+g = [[] for _ in range(n + 1)]
+state = [False] * (n + 1)
+dist = [inf] * (n + 1)
+for i in range(m):
+    x, y, z = map(int, input().split())
+    g[x].append((y, z))
+
+
+def dijkstra_heap():
+    global n
+    dist[1] = 0
+    hp = []
+    heapq.heappush(hp, (0, 1))
+    while hp:
+        d, v = heapq.heappop(hp)
+        if state[v]:
+            continue
+        state[v] = True
+
+        for nxt, weight in g[v]:
+            if dist[nxt] > dist[v] + weight:
+                dist[nxt] = dist[v] + weight
+                heapq.heappush(hp, (dist[nxt], nxt))
+
+    return -1 if dist[n] == inf else dist[n]
+
+
+print(dijkstra_heap())
