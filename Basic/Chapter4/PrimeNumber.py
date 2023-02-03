@@ -46,3 +46,21 @@ n = int(input())
 for _ in range(n):
     a = int(input())
     decomposition_prime_factors(a)
+
+"""
+868. 筛质数
+https://www.acwing.com/problem/content/870/
+"""
+
+"""埃氏筛法"""
+n = int(input())
+prime = []
+state = [False] * (n + 1)
+for i in range(2, n + 1):
+    if not state[i]:
+        prime.append(i)
+        j = 2
+        while i * j <= n:
+            state[i * j] = True
+            j += 1
+print(len(prime))
