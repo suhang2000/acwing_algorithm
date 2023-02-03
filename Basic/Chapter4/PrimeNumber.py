@@ -20,3 +20,29 @@ for _ in range(n):
             break
         i += 1
     print("Yes" if flag else "No")
+
+"""
+867. 分解质因数
+https://www.acwing.com/problem/content/869/
+"""
+
+
+def decomposition_prime_factors(x):
+    i = 2
+    while i <= x // i:
+        if x % i == 0:
+            cnt = 0
+            while x % i == 0:
+                x //= i
+                cnt += 1
+            print(i, cnt, sep=' ')
+        i += 1
+    if x > 1:
+        print(x, 1, sep=' ')
+    print()
+
+
+n = int(input())
+for _ in range(n):
+    a = int(input())
+    decomposition_prime_factors(a)
