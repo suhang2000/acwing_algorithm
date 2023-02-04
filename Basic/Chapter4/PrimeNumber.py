@@ -64,3 +64,20 @@ for i in range(2, n + 1):
             state[i * j] = True
             j += 1
 print(len(prime))
+
+"""线性筛法"""
+n = int(input())
+prime = []
+state = [False] * (n + 1)
+
+for i in range(2, n + 1):
+    if not state[i]:
+        prime.append(i)
+    for p in prime:
+        if i * p > n:
+            break
+        state[i * p] = True
+        if i % p == 0:
+            break
+
+print(len(prime))
