@@ -70,3 +70,36 @@ for _ in range(n):
 for v in cnt.values():
     res = (res * (v + 1)) % MOD
 print(res)
+
+"""
+871. 约数之和
+https://www.acwing.com/problem/content/873/
+x = p1^a1 + p2^a2 + ... + pn^an
+==> divisor sum: (p1^0 + p1^1 + ... + p1^a1) * ... * (pn^0 + pn^1 + ... + pn^an)
+"""
+
+
+def prime_divisor(x):
+    i = 2
+    while i <= x // i:
+        while x % i == 0:
+            x //= i
+            cnt[i] += 1
+        i += 1
+    if x > 1:
+        cnt[x] += 1
+
+
+MOD = 10 ** 9 + 7
+n = int(input())
+cnt = collections.Counter()
+for _ in range(n):
+    a = int(input())
+    prime_divisor(a)
+res = 1
+for p, a in cnt.items():
+    t = 1
+    for i in range(a):
+        t = (t * p + 1) % MOD
+    res = (res * t) % MOD
+print(res)
