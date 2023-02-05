@@ -1,6 +1,7 @@
 """
 Divisor
 """
+import collections
 
 """
 869. 试除法求约数
@@ -38,3 +39,34 @@ for _ in range(n):
         res.append(a // res[idx])
         idx -= 1
     print(*res)
+
+"""
+870. 约数个数
+https://www.acwing.com/problem/content/872/
+x = p1^a1 + p2^a2 + ... + pn^an
+==> divisor number: (a1+1)*(a2+1)*...(an+1)
+"""
+# 先分解质因数，统计每个质数及其出现次数，然后利用上述求和公式
+
+
+def divisor_number(x):
+    i = 2
+    while i <= x // i:
+        while x % i == 0:
+            x //= i
+            cnt[i] += 1
+        i += 1
+    if x > 1:
+        cnt[x] += 1
+
+
+MOD = 10 ** 9 + 7
+n = int(input())
+res = 1
+cnt = collections.Counter()
+for _ in range(n):
+    a = int(input())
+    divisor_number(a)
+for v in cnt.values():
+    res = (res * (v + 1)) % MOD
+print(res)
