@@ -103,3 +103,19 @@ for p, a in cnt.items():
         t = (t * p + 1) % MOD
     res = (res * t) % MOD
 print(res)
+
+"""
+872. 最大公约数
+https://www.acwing.com/problem/content/874/
+辗转相除法
+"""
+
+
+def gcd(a, b):
+    return a if b == 0 else gcd(b, a % b)
+
+
+n = int(input())
+for _ in range(n):
+    a, b = map(int, input().split())
+    print(gcd(a, b))
