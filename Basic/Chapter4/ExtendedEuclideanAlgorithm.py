@@ -37,3 +37,26 @@ for _ in range(n):
         print(x * b // gcd % m)
     else:
         print("impossible")
+
+"""
+204. 表达整数的奇怪方式
+https://www.acwing.com/problem/content/206/
+"""
+
+n = int(input())
+x, y = 0, 0
+a1, m1 = map(int, input().split())
+flag = True
+for _ in range(n - 1):
+    a2, m2 = map(int, input().split())
+    gcd = extend_euclidean_algorithm(a1, -a2)
+    if (m2 - m1) % gcd:
+        flag = False
+        break
+    x = x * (m2 - m1) // gcd % abs(a2 // gcd)
+    m1 = x * a1 + m1
+    a1 = abs(a1 // gcd * a2)
+if flag:
+    print(m1)
+else:
+    print(-1)
