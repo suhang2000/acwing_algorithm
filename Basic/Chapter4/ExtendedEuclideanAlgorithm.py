@@ -22,3 +22,18 @@ for _ in range(n):
     a, b = map(int, input().split())
     extend_euclidean_algorithm(a, b)
     print(x, y)
+
+"""
+878. 线性同余方程
+https://www.acwing.com/problem/content/880/
+"""
+
+n = int(input())
+x, y = 0, 0
+for _ in range(n):
+    a, b, m = map(int, input().split())
+    gcd = extend_euclidean_algorithm(a, m)
+    if b % gcd == 0:
+        print(x * b // gcd % m)
+    else:
+        print("impossible")
