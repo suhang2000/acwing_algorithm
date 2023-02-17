@@ -57,3 +57,54 @@ else:
         if abs(a[i][n]) < EPS:
             a[i][n] = 0
         print("{:.2f}".format(a[i][n]))
+
+"""
+884. 高斯消元解异或线性方程组
+https://www.acwing.com/problem/content/886/
+"""
+
+
+def gauss_xor():
+    r = 0
+    for c in range(n):
+        t = r
+        for i in range(r, n):
+            if a[i][c]:
+                t = i
+                break
+        if a[t][c] == 0:
+            continue
+        if t != r:
+            # swap
+            a[t], a[r] = a[r], a[t]
+        for i in range(r + 1, n):
+            if a[i][c]:
+                for j in range(n, c - 1, -1):
+                    a[i][j] ^= a[r][j]
+        r += 1
+
+    if r < n:
+        for i in range(r, n):
+            if a[i][n]:
+                return 2
+        return 1
+
+    for i in range(n - 1, -1, -1):
+        for j in range(i + 1, n):
+            a[i][n] ^= a[i][j] & a[j][n]
+    return 0
+
+
+n = int(input())
+a = []
+for _ in range(n):
+    a.append(list(map(int, input().split())))
+
+res = gauss_xor()
+if res == 2:
+    print("No solution")
+elif res == 1:
+    print("Multiple sets of solutions")
+else:
+    for i in range(n):
+        print(a[i][n])
