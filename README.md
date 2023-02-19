@@ -50,3 +50,5 @@
 - Euler Function
 - Prime Number
 - Extended Euclidean Algorithm
+- Gauss Elimination
+- Combinatorial Number
