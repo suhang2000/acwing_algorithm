@@ -96,3 +96,47 @@ n = int(input())
 for _ in range(n):
     a, b, p = map(int, input().split())
     print(lucas(a, b, p))
+
+"""
+888. 求组合数 IV
+https://www.acwing.com/problem/content/890/
+"""
+
+
+# 线性筛n以内的质数
+def get_primes(n):
+    for i in range(2, n + 1):
+        if not state[i]:
+            primes.append(i)
+        for p in primes:
+            if i * p > n:
+                break
+            state[i * p] = True
+            if i % p == 0:
+                break
+
+
+# n的阶乘中，分解质因数p的个数
+def get(n, p):
+    res = 0
+    while n:
+        res += n // p
+        n //= p
+    return res
+
+
+a, b = map(int, input().split())
+primes = []
+state = [False] * (a + 1)
+
+get_primes(a)
+cnt = len(primes)
+prime_cnt = [0] * cnt
+for i, p in enumerate(primes):
+    prime_cnt[i] = get(a, p) - get(a - b, p) - get(b, p)
+
+res = 1
+# 将组合数分解成质因数相乘
+for p, c in zip(primes, prime_cnt):
+    res *= pow(p, c)
+print(res)
