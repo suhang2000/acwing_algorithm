@@ -52,3 +52,4 @@
 - Extended Euclidean Algorithm
 - Gauss Elimination
 - Combinatorial Number
+- Inclusive-exclusion Principle
