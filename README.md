@@ -53,3 +53,4 @@
 - Gauss Elimination
 - Combinatorial Number
 - Inclusive-exclusion Principle
+- Game Theory
