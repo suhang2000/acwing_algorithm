@@ -52,3 +52,29 @@ h = list(map(int, input().split()))
 cache = [-1] * 10010
 res = reduce(xor, [sg(x) for x in h])
 print("Yes" if res else "No")
+
+"""
+894. 拆分-Nim游戏
+https://www.acwing.com/problem/content/896/
+"""
+
+
+def sg(x):
+    if cache[x] != -1:
+        return cache[x]
+    state = set()
+    for i in range(x):
+        for j in range(i + 1):
+            state.add(sg(i) ^ sg(j))
+    i = 0
+    while i in state:
+        i += 1
+    cache[x] = i
+    return i
+
+
+n = int(input())
+a = list(map(int, input().split()))
+cache = [-1] * 110
+res = reduce(xor, [sg(x) for x in a])
+print("Yes" if res else "No")
