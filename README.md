@@ -54,3 +54,7 @@
 - Combinatorial Number
 - Inclusive-exclusion Principle
 - Game Theory
+
+## Chapter 5: Dynamic Programming
+
+- Knapsack problem
