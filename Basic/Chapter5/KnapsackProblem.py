@@ -13,3 +13,16 @@ for i in range(n):
     for j in range(volume, v - 1, -1):
         dp[j] = max(dp[j], dp[j - v] + w)
 print(dp[-1])
+
+"""
+3. 完全背包问题
+https://www.acwing.com/problem/content/3/
+"""
+
+n, volume = map(int, input().split())
+dp = [0] * (volume + 1)
+for i in range(n):
+    v, w = map(int, input().split())
+    for j in range(v, volume + 1):
+        dp[j] = max(dp[j], dp[j - v] + w)
+print(dp[-1])
