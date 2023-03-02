@@ -84,3 +84,31 @@ for i in range(m):
     for j in range(volume, v[i] - 1, -1):
         dp[j] = max(dp[j], dp[j - v[i]] + w[i])
 print(dp[-1])
+
+"""
+9. 分组背包问题
+https://www.acwing.com/problem/content/9/
+"""
+
+n, volume = map(int, input().split())
+v, w = [], []
+s = []
+for i in range(n):
+    si = int(input())
+    vi, wi = [], []
+    for j in range(si):
+        a, b = map(int, input().split())
+        vi.append(a)
+        wi.append(b)
+    v.append(vi)
+    w.append(wi)
+    s.append(si)
+
+dp = [0] * (volume + 1)
+for i in range(n):
+    for j in range(volume, -1, -1):
+        # 先遍历容量，再遍历组数，这样才是每组选一个，顺序不能换
+        for k in range(s[i]):
+            if v[i][k] <= j:
+                dp[j] = max(dp[j], dp[j - v[i][k]] + w[i][k])
+print(dp[-1])
