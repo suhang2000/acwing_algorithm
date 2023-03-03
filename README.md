@@ -58,3 +58,4 @@
 ## Chapter 5: Dynamic Programming
 
 - Knapsack problem
+- Linear DP
