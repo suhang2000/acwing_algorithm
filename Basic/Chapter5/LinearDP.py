@@ -35,3 +35,26 @@ for j in range(1, n):
         if nums[i] < nums[j]:
             dp[j] = max(dp[j], dp[i] + 1)
 print(max(dp))
+
+"""
+896. 最长上升子序列 II
+https://www.acwing.com/problem/content/898/
+"""
+
+n = int(input())
+nums = list(map(int, input().split()))
+f = []
+for x in nums:
+    # binary search f
+    l, r = 0, len(f) - 1
+    while l <= r:
+        mid = (l + r) >> 1
+        if f[mid] >= x:
+            r = mid - 1
+        else:
+            l = mid + 1
+    if l == len(f):
+        f.append(x)
+    else:
+        f[l] = x
+print(len(f))
