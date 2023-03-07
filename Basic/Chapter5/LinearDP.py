@@ -58,3 +58,17 @@ for x in nums:
     else:
         f[l] = x
 print(len(f))
+
+"""
+897. 最长公共子序列
+https://www.acwing.com/problem/content/899/
+"""
+
+n, m = map(int, input().split())
+a = input()
+b = input()
+f = [[0] * (m + 1) for _ in range(n + 1)]
+for i in range(1, n + 1):
+    for j in range(1, m + 1):
+        f[i][j] = f[i - 1][j - 1] + 1 if a[i - 1] == b[j - 1] else max(f[i - 1][j], f[i][j - 1])
+print(f[-1][-1])
