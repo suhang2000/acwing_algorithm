@@ -94,3 +94,32 @@ for i in range(1, n + 1):
         else:
             f[i][j] = min(f[i - 1][j], f[i][j - 1], f[i - 1][j - 1]) + 1
 print(f[n][m])
+
+"""
+899. 编辑距离
+https://www.acwing.com/problem/content/901/
+"""
+
+n, m = map(int, input().split())
+s = []
+for _ in range(n):
+    s.append(input())
+for _ in range(m):
+    a, limit = input().split()
+    limit = int(limit)
+    cnt = 0
+    for b in s:
+        la, lb = len(a), len(b)
+        f = [[0] * (lb + 1) for _ in range(la + 1)]
+        f[0] = list(range(lb + 1))
+        for i in range(1, la + 1):
+            f[i][0] = i
+        for i in range(1, la + 1):
+            for j in range(1, lb + 1):
+                if a[i - 1] == b[j - 1]:
+                    f[i][j] = f[i - 1][j - 1]
+                else:
+                    f[i][j] = min(f[i - 1][j], f[i][j - 1], f[i - 1][j - 1]) + 1
+        if f[la][lb] <= limit:
+            cnt += 1
+    print(cnt)
