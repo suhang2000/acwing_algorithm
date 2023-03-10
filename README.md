@@ -59,3 +59,4 @@
 
 - Knapsack problem
 - Linear DP
+- Interval DP
